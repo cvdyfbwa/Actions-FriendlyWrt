@@ -66,8 +66,8 @@ jobs:
       run: |
         mkdir project
         cd project
-        repo init --depth=1 -u https://github.com/cvdyfbwa/friendlywrt/friendlywrt_manifests -b master-v${{ matrix.VERSION }} \
-                -m rk3399.xml --repo-url=https://github.com/friendlyarm/repo  --no-clone-bundle
+        repo init --depth=1 -u https://github.com/cvdyfbwa/friendlywrt_manifests -b master-v${{ matrix.VERSION }} \
+                -m rk3399.xml --repo-url=https://github.com/cvdyfbwa/repo  --no-clone-bundle
         
         repo sync -c configs --no-clone-bundle
         repo sync -c device/common --no-clone-bundle
@@ -165,7 +165,7 @@ jobs:
         sudo -E bash ./install.sh
         sudo -E git config --global user.name 'GitHub Actions'
         sudo -E git config --global user.email 'noreply@github.com'
-        git clone https://github.com/friendlyarm/repo
+        git clone https://github.com/cvdyfbwa/repo
         sudo -E cp repo/repo /usr/bin/
         mkdir -p ./artifact
         sudo swapoff -a
