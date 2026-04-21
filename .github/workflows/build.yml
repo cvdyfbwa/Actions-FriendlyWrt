@@ -78,11 +78,26 @@ jobs:
 
         git clone https://github.com/cvdyfbwa/friendlywrt -b master-v24.10 --depth 1 friendlywrt
 
+    - name: Enable SPI & I2C in DTS
+      run: |
+        cd project
+
+        DTS_PATH=$(find . -name "*.dts" | grep rk3588 | head -n 1)
+
+        echo "Using DTS: $DTS_PATH"
+
+        sed -i 's/status = "disabled";/status = "okay";/g' $DTS_PATH
+
+        grep -q "spidev" $DTS_PATH || sed -i '/spi@/a\ \ \ \ spidev@0 { compatible = "spidev"; reg = <0>; spi-max-frequency = <50000000>; };' $DTS_PATH
+
+        sed -i '/i2c@/s/status = "disabled"/status = "okay"/g' $DTS_PATH
+
     - name: Apply customizations
       run: |
         cd project
         source ../scripts/add_packages.sh
         source ../scripts/custome_config.sh
+        bash ../scripts/enable_spi_i2c.sh
 
     - name: Prepare dot config and feeds
       run: |
