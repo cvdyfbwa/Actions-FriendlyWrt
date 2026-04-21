@@ -165,7 +165,7 @@ jobs:
         sudo -E bash ./install.sh
         sudo -E git config --global user.name 'GitHub Actions'
         sudo -E git config --global user.email 'noreply@github.com'
-        git clone https://github.com/cvdyfbwa/repo
+        git clone https://github.com/friendlyarm/repo
         sudo -E cp repo/repo /usr/bin/
         mkdir -p ./artifact
         sudo swapoff -a
